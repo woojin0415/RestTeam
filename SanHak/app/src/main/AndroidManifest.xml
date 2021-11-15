@@ -20,6 +20,8 @@
         </activity>
 
         <activity android:name=".page2Activity"/>
+        <activity android:name=".page3Activity"/>
+        <activity android:name=".page4Activity"/>
     </application>
 
 </manifest>
