@@ -20,16 +20,16 @@ public class page2Activity extends AppCompatActivity {
         String[] Region_Seoul={"-세부 지역 선택-", "강서구", "양천구", "구로구","영등포구","금천구","관악구","동작구","서초구"
         , "강남구", "송파구", "강동구", "흥신구","마포구","서대문구","종로구","중구","성동구","광진구","중랑구","동대문구","서대문구",
         "은평구","성북구","강북구","도봉구","노원구"};
-        String[] Region_Chungbuk={"단양군","제천시","충주시","음성군","진천군","증평군","괴산군","청주시","보은군","옥천군","영동군"};
-        
-        
-        
-        
+        String[] Region_Chungbuk={"-세부 지역 선택-","단양군","제천시","충주시","음성군","진천군","증평군","괴산군","청주시","보은군","옥천군","영동군"};
+
+
+
+
         Spinner sp1 = (Spinner) findViewById(R.id.region);
         Spinner selectbox_detail = (Spinner) findViewById(R.id.region_detail);
-        
-        
-        
+
+
+
         ArrayAdapter<String> adapter_seoul = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Seoul);
         adapter_seoul.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
@@ -56,6 +56,17 @@ public class page2Activity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        findViewById(R.id.bt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String selectRegion;
+                selectRegion = selectbox_detail.getSelectedItem().toString();
+                Intent intent = new Intent(getApplicationContext(),page3Activity.class);
+                intent.putExtra("region",selectRegion);
+                startActivity(intent);
             }
         });
 
