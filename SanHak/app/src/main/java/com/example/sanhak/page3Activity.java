@@ -12,6 +12,8 @@ public class page3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page3);
 
+        String region = (String) getIntent().getStringExtra("region");
+
     }
-    
+
 }
