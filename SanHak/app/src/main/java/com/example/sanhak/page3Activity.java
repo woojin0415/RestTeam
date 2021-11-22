@@ -20,10 +20,18 @@ import java.net.URL;
 import java.util.Map;
 
 public class page3Activity extends AppCompatActivity {
+
+
+    String janggi;
+    String dangi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page3);
+
+        //장기 예보
+
+        String region = (String) getIntent().getStringExtra("region");
 
         String service_key = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg%2Fw63QDxpysaPMLy8Gc3r4nOD3MCn%2Bn0dl0I2wON9ZwSQ%3D%3D";
         String num_of_rows = "10";
@@ -32,18 +40,35 @@ public class page3Activity extends AppCompatActivity {
         String stnId = "11B00000";
         String tmFc = "202111211800";
 
-        String url = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?"+
+        String url_janggi = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?"+
                 "serviceKey="+service_key+
                 "&numOfRows="+num_of_rows+
                 "&pageNo="+page_no+
                 "&regId="+stnId+
                 "&tmFc="+tmFc;
 
-        String region = (String) getIntent().getStringExtra("region");
+        // 단기 예보
 
 
-        NetworkTask networktask = new NetworkTask(url, null);
-        networktask.execute();
+
+        String service_key_dan = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg/w63QDxpysaPMLy8Gc3r4nOD3MCn+n0dl0I2wON9ZwSQ==";
+        String num_of_rows_dan = "10";
+        String page_no_dan = "1";
+        String data_type_dan = "XML";
+        String regId_dan = "11C10301";
+
+        String url_dangi = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0?"+
+                "serviceKey="+service_key_dan+
+                "&numOfRows="+num_of_rows_dan+
+                "&pageNo="+page_no_dan+
+                "&regId="+regId_dan;
+
+
+        NetworkTask_jang networktask_janggi = new NetworkTask_jang(url_janggi, null);
+        networktask_janggi.execute();
+
+        NetworkTask_dan networktask_dan = new NetworkTask_dan(url_dangi, null);
+        networktask_dan.execute();
 
     }
     public class RequsetHttpConnection {
@@ -112,11 +137,11 @@ public class page3Activity extends AppCompatActivity {
     }
 
 
-    public class NetworkTask extends AsyncTask<Void, Void, String>{
+    public class NetworkTask_jang extends AsyncTask<Void, Void, String>{
         private String url;
         private ContentValues values;
 
-        public NetworkTask(String url, ContentValues values){
+        public NetworkTask_jang(String url, ContentValues values){
             this.url = url;
             this.values = values;
         }
@@ -128,6 +153,8 @@ public class page3Activity extends AppCompatActivity {
             String result;
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
             result = requestHttpConnection.request(url,values);
+            janggi = result;
+            System.out.println(result);
 
             return result;
         }
@@ -136,7 +163,38 @@ public class page3Activity extends AppCompatActivity {
         protected  void onPostExecute(String s){
             super.onPostExecute(s);
 
-            System.out.println(s);
+            janggi = s;
+        }
+    }
+
+
+    public class NetworkTask_dan extends AsyncTask<Void, Void, String>{
+        private String url;
+        private ContentValues values;
+
+        public NetworkTask_dan(String url, ContentValues values){
+            this.url = url;
+            this.values = values;
+        }
+
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            String result;
+            RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
+            result = requestHttpConnection.request(url,values);
+            dangi = result;
+            System.out.println(result);
+
+            return result;
+        }
+
+        @Override
+        protected  void onPostExecute(String s){
+            super.onPostExecute(s);
+
+            dangi = s;
         }
     }
 }
