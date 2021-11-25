@@ -17,6 +17,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class page3Activity extends AppCompatActivity {
@@ -29,6 +31,12 @@ public class page3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page3);
 
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
+        String getTime = sdf.format(date);
+        Log.w("YAG",getTime);
+
         //장기 예보
 
         String region = (String) getIntent().getStringExtra("region");
@@ -38,7 +46,7 @@ public class page3Activity extends AppCompatActivity {
         String page_no = "1";
         String data_type = "XML";
         String stnId = "11B00000";
-        String tmFc = "202111211800";
+        String tmFc = "202111241800";
 
         String url_janggi = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?"+
                 "serviceKey="+service_key+
