@@ -192,6 +192,10 @@ public class page3Activity extends AppCompatActivity {
             String result;
             String response = "";
             String body = "";
+            String items = "";
+            String item = "";
+            String wf3Pm = "";
+
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
             result = requestHttpConnection.request(url,values);
             try {
@@ -201,11 +205,23 @@ public class page3Activity extends AppCompatActivity {
                 JSONObject jsonObject_body = new JSONObject(response);
                 body = jsonObject_body.getString("body");
 
+                JSONObject jsonObject_items = new JSONObject(body);
+                items = jsonObject_items.getString("items");
+
+                JSONObject jsonObject_item = new JSONObject(items);
+                item = jsonObject_item.getString("item");
+
+                JSONArray jsonArray = new JSONArray(item);
+
+                JSONObject jsonObject_wf3 = jsonArray.getJSONObject(0);
+                wf3Pm = jsonObject_wf3.getString("wf3Pm");
+
             } catch (JSONException e) {
                 e.printStackTrace();
+
             }
-            System.out.println(body);
-            System.out.println(result);
+            System.out.println(wf3Pm);
+            System.out.println(item);
 
 
             return result;
