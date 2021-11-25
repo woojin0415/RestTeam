@@ -11,9 +11,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,6 +31,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class page3Activity extends AppCompatActivity {
 
@@ -52,11 +66,6 @@ public class page3Activity extends AppCompatActivity {
 
         String APItime = beforeYear + beforeMonth + beforeDay + "1800";
 
-
-
-        Log.w("YAG",APItime);
-
-
         //장기 예보
 
         String region = (String) getIntent().getStringExtra("region");
@@ -64,7 +73,7 @@ public class page3Activity extends AppCompatActivity {
         String service_key = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg%2Fw63QDxpysaPMLy8Gc3r4nOD3MCn%2Bn0dl0I2wON9ZwSQ%3D%3D";
         String num_of_rows = "10";
         String page_no = "1";
-        String data_type = "XML";
+        String data_type = "JSON";
         String stnId = "11B00000";
         String tmFc = APItime;
 
@@ -72,6 +81,7 @@ public class page3Activity extends AppCompatActivity {
                 "serviceKey="+service_key+
                 "&numOfRows="+num_of_rows+
                 "&pageNo="+page_no+
+                "&dataType="+data_type+
                 "&regId="+stnId+
                 "&tmFc="+tmFc;
 
@@ -79,7 +89,7 @@ public class page3Activity extends AppCompatActivity {
 
 
 
-        String service_key_dan = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg/w63QDxpysaPMLy8Gc3r4nOD3MCn+n0dl0I2wON9ZwSQ==";
+        /*String service_key_dan = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg%2Fw63QDxpysaPMLy8Gc3r4nOD3MCn%2Bn0dl0I2wON9ZwSQ%3D%3D";
         String num_of_rows_dan = "10";
         String page_no_dan = "1";
         String data_type_dan = "XML";
@@ -89,14 +99,15 @@ public class page3Activity extends AppCompatActivity {
                 "serviceKey="+service_key_dan+
                 "&numOfRows="+num_of_rows_dan+
                 "&pageNo="+page_no_dan+
-                "&regId="+regId_dan;
+                "&regId="+regId_dan;*/
 
 
         NetworkTask_jang networktask_janggi = new NetworkTask_jang(url_janggi, null);
         networktask_janggi.execute();
 
-        NetworkTask_dan networktask_dan = new NetworkTask_dan(url_dangi, null);
-        networktask_dan.execute();
+        /*NetworkTask_dan networktask_dan = new NetworkTask_dan(url_dangi, null);
+        networktask_dan.execute();*/
+
 
     }
     public class RequsetHttpConnection {
@@ -179,10 +190,23 @@ public class page3Activity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
 
             String result;
+            String response = "";
+            String body = "";
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
             result = requestHttpConnection.request(url,values);
-            janggi = result;
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                response = jsonObject.getString("response");
+
+                JSONObject jsonObject_body = new JSONObject(response);
+                body = jsonObject_body.getString("body");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            System.out.println(body);
             System.out.println(result);
+
 
             return result;
         }
@@ -190,8 +214,6 @@ public class page3Activity extends AppCompatActivity {
         @Override
         protected  void onPostExecute(String s){
             super.onPostExecute(s);
-
-            janggi = s;
         }
     }
 
@@ -212,8 +234,7 @@ public class page3Activity extends AppCompatActivity {
             String result;
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
             result = requestHttpConnection.request(url,values);
-            dangi = result;
-            System.out.println(result);
+            System.out.println(result.toString());
 
             return result;
         }
