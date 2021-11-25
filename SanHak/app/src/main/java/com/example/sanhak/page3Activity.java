@@ -195,6 +195,14 @@ public class page3Activity extends AppCompatActivity {
             String items = "";
             String item = "";
             String wf3Pm = "";
+            String wf4Pm = "";
+            String wf5Pm = "";
+            String wf6Pm = "";
+            String wf7Pm = "";
+            String wf8 = "";
+            String wf9 = "";
+            String wf10 = "";
+
 
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
             result = requestHttpConnection.request(url,values);
@@ -213,16 +221,21 @@ public class page3Activity extends AppCompatActivity {
 
                 JSONArray jsonArray = new JSONArray(item);
 
-                JSONObject jsonObject_wf3 = jsonArray.getJSONObject(0);
-                wf3Pm = jsonObject_wf3.getString("wf3Pm");
+                JSONObject jsonObject_wf = jsonArray.getJSONObject(0);
+                wf3Pm = jsonObject_wf.getString("wf3Pm");
+                wf4Pm = jsonObject_wf.getString("wf4Pm");
+                wf5Pm = jsonObject_wf.getString("wf5Pm");
+                wf6Pm = jsonObject_wf.getString("wf6Pm");
+                wf7Pm = jsonObject_wf.getString("wf7Pm");
+                wf8 = jsonObject_wf.getString("wf8");
+                wf9 = jsonObject_wf.getString("wf9");
+                wf10 = jsonObject_wf.getString("wf10");
+                
 
             } catch (JSONException e) {
                 e.printStackTrace();
 
             }
-            System.out.println(wf3Pm);
-            System.out.println(item);
-
 
             return result;
         }
