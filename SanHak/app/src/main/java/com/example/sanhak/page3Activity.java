@@ -3,6 +3,7 @@ package com.example.sanhak;
 import android.app.AppComponentFactory;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,7 +46,19 @@ public class page3Activity extends AppCompatActivity {
 
     String janggi;
     String dangi;
-    long today;
+    int today;
+    String wf3Pm = "";
+    String wf4Pm = "";
+    String wf5Pm = "";
+    String wf6Pm = "";
+    String wf7Pm = "";
+    String wf8 = "";
+    String wf9 = "";
+    String wf10 = "";
+
+    int[] IVhash = {R.id.c0, R.id.c1, R.id.c2,R.id.c3,R.id.c4,R.id.c5,R.id.c6,R.id.c7,R.id.c8,R.id.c9,R.id.c10,R.id.c11,R.id.c12,
+            R.id.c13,R.id.c14,R.id.c15,R.id.c16,R.id.c17,R.id.c18,R.id.c19,R.id.c20,R.id.c21,R.id.c22,R.id.c23,R.id.c24,R.id.c25,
+            R.id.c26,R.id.c27,R.id.c28,R.id.c29,R.id.c30,R.id.c31,R.id.c32,R.id.c33,R.id.c34};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +104,7 @@ public class page3Activity extends AppCompatActivity {
             diff_first = diff_first / (24 * 60 * 60 * 1000);
             diff_first = Math.abs(diff_first);
 
-            today = diff_first%7 + diff_day - diff_first;
+            today = (int)diff_first%7 + (int)diff_day - (int)diff_first;
 
             System.out.println(today);
 
@@ -118,6 +131,21 @@ public class page3Activity extends AppCompatActivity {
 
             NetworkTask_jang networktask_janggi = new NetworkTask_jang(url_janggi, null);
             networktask_janggi.execute();
+            while(wf3Pm=="");
+
+
+            if(wf3Pm.contains("비")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+3%35]);
+                iv.setImageResource(R.drawable.rain);
+            }
+            else if(wf3Pm.contains("구름")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+3%35]);
+                iv.setImageResource(R.drawable.cloud);
+            }
+            else if(wf3Pm.contains("맑음")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+3%35]);
+                iv.setImageResource(R.drawable.sun);
+            }
 
             // 단기 예보
 
@@ -229,19 +257,6 @@ public class page3Activity extends AppCompatActivity {
             String body = "";
             String items = "";
             String item = "";
-            String wf3Pm = "";
-            String wf4Pm = "";
-            String wf5Pm = "";
-            String wf6Pm = "";
-            String wf7Pm = "";
-            String wf8 = "";
-            String wf9 = "";
-            String wf10 = "";
-            
-            int[] IVhash = {R.id.c0, R.id.c1, R.id.c2,R.id.c3,R.id.c4,R.id.c5,R.id.c6,R.id.c7,R.id.c8,R.id.c9,R.id.c10,R.id.c11,R.id.c12,
-                    R.id.c13,R.id.c14,R.id.c15,R.id.c16,R.id.c17,R.id.c18,R.id.c19,R.id.c20,R.id.c21,R.id.c22,R.id.c23,R.id.c24,R.id.c25,
-                    R.id.c26,R.id.c27,R.id.c28,R.id.c29,R.id.c30,R.id.c31,R.id.c32,R.id.c33,R.id.c34};
-            
 
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
             result = requestHttpConnection.request(url, values);
@@ -270,6 +285,7 @@ public class page3Activity extends AppCompatActivity {
                 wf8 = jsonObject_wf.getString("wf8");
                 wf9 = jsonObject_wf.getString("wf9");
                 wf10 = jsonObject_wf.getString("wf10");
+
 
 
             } catch (JSONException e) {
@@ -312,7 +328,6 @@ public class page3Activity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            dangi = s;
         }
     }
 }
