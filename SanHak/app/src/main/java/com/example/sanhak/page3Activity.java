@@ -24,9 +24,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,51 +43,67 @@ public class page3Activity extends AppCompatActivity {
 
     String janggi;
     String dangi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page3);
 
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
-        String getTime = sdf.format(date);
+        String std_day = "2021:08:01";
+        long diff_day;
+        try {
+            long now = System.currentTimeMillis();
+            Date date = new Date(now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
 
-        String year = getTime.substring(0,4);
-        String month = getTime.substring(5,7);
-        String day = getTime.substring(8,10);
+            Date std_date = sdf.parse(std_day);
+            diff_day = date.getTime() - std_date.getTime();
+            diff_day = diff_day / (24 * 60 * 60 * 1000);
+            diff_day = Math.abs(diff_day);
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE, -1);
-        String beforeDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+            System.out.println(diff_day);
 
-        String beforeYear = beforeDate.substring(0,4);
-        String beforeMonth = beforeDate.substring(5,7);
-        String beforeDay = beforeDate.substring(8,10);
 
-        String APItime = beforeYear + beforeMonth + beforeDay + "1800";
+            String getTime = sdf.format(date);
 
-        //장기 예보
+            String year = getTime.substring(0, 4);
+            String month = getTime.substring(5, 7);
+            String day = getTime.substring(8, 10);
 
-        String region = (String) getIntent().getStringExtra("region");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, -1);
+            String beforeDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
 
-        String service_key = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg%2Fw63QDxpysaPMLy8Gc3r4nOD3MCn%2Bn0dl0I2wON9ZwSQ%3D%3D";
-        String num_of_rows = "10";
-        String page_no = "1";
-        String data_type = "JSON";
-        String stnId = "11B00000";
-        String tmFc = APItime;
+            String beforeYear = beforeDate.substring(0, 4);
+            String beforeMonth = beforeDate.substring(5, 7);
+            String beforeDay = beforeDate.substring(8, 10);
 
-        String url_janggi = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?"+
-                "serviceKey="+service_key+
-                "&numOfRows="+num_of_rows+
-                "&pageNo="+page_no+
-                "&dataType="+data_type+
-                "&regId="+stnId+
-                "&tmFc="+tmFc;
+            String APItime = beforeYear + beforeMonth + beforeDay + "1800";
 
-        // 단기 예보
+            //장기 예보
+
+            String region = (String) getIntent().getStringExtra("region");
+
+            String service_key = "TBK8Bq75wKqViN5AH0Hzxl25kH3AbT8G5ps96GKkAg%2Fw63QDxpysaPMLy8Gc3r4nOD3MCn%2Bn0dl0I2wON9ZwSQ%3D%3D";
+            String num_of_rows = "10";
+            String page_no = "1";
+            String data_type = "JSON";
+            String stnId = "11B00000";
+            String tmFc = APItime;
+
+            String url_janggi = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?" +
+                    "serviceKey=" + service_key +
+                    "&numOfRows=" + num_of_rows +
+                    "&pageNo=" + page_no +
+                    "&dataType=" + data_type +
+                    "&regId=" + stnId +
+                    "&tmFc=" + tmFc;
+
+            NetworkTask_jang networktask_janggi = new NetworkTask_jang(url_janggi, null);
+            networktask_janggi.execute();
+
+            // 단기 예보
 
 
 
@@ -101,15 +119,16 @@ public class page3Activity extends AppCompatActivity {
                 "&pageNo="+page_no_dan+
                 "&regId="+regId_dan;*/
 
-
-        NetworkTask_jang networktask_janggi = new NetworkTask_jang(url_janggi, null);
-        networktask_janggi.execute();
-
         /*NetworkTask_dan networktask_dan = new NetworkTask_dan(url_dangi, null);
         networktask_dan.execute();*/
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
     }
+
     public class RequsetHttpConnection {
         public String request(String _url, ContentValues _params) {
             HttpURLConnection urlConn = null;
@@ -156,7 +175,7 @@ public class page3Activity extends AppCompatActivity {
                 String line;
                 String page = "";
 
-                while ((line = reader.readLine()) != null){
+                while ((line = reader.readLine()) != null) {
                     page += line;
                 }
 
@@ -166,8 +185,8 @@ public class page3Activity extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally{
-                if(urlConn != null)
+            } finally {
+                if (urlConn != null)
                     urlConn.disconnect();
             }
 
@@ -176,11 +195,11 @@ public class page3Activity extends AppCompatActivity {
     }
 
 
-    public class NetworkTask_jang extends AsyncTask<Void, Void, String>{
+    public class NetworkTask_jang extends AsyncTask<Void, Void, String> {
         private String url;
         private ContentValues values;
 
-        public NetworkTask_jang(String url, ContentValues values){
+        public NetworkTask_jang(String url, ContentValues values) {
             this.url = url;
             this.values = values;
         }
@@ -205,7 +224,8 @@ public class page3Activity extends AppCompatActivity {
 
 
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
-            result = requestHttpConnection.request(url,values);
+            result = requestHttpConnection.request(url, values);
+            System.out.println(result);
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 response = jsonObject.getString("response");
@@ -230,7 +250,7 @@ public class page3Activity extends AppCompatActivity {
                 wf8 = jsonObject_wf.getString("wf8");
                 wf9 = jsonObject_wf.getString("wf9");
                 wf10 = jsonObject_wf.getString("wf10");
-                
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -241,17 +261,17 @@ public class page3Activity extends AppCompatActivity {
         }
 
         @Override
-        protected  void onPostExecute(String s){
+        protected void onPostExecute(String s) {
             super.onPostExecute(s);
         }
     }
 
 
-    public class NetworkTask_dan extends AsyncTask<Void, Void, String>{
+    public class NetworkTask_dan extends AsyncTask<Void, Void, String> {
         private String url;
         private ContentValues values;
 
-        public NetworkTask_dan(String url, ContentValues values){
+        public NetworkTask_dan(String url, ContentValues values) {
             this.url = url;
             this.values = values;
         }
@@ -262,14 +282,14 @@ public class page3Activity extends AppCompatActivity {
 
             String result;
             RequsetHttpConnection requestHttpConnection = new RequsetHttpConnection();
-            result = requestHttpConnection.request(url,values);
+            result = requestHttpConnection.request(url, values);
             System.out.println(result.toString());
 
             return result;
         }
 
         @Override
-        protected  void onPostExecute(String s){
+        protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
             dangi = s;
