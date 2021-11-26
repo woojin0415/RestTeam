@@ -50,19 +50,14 @@ public class page3Activity extends AppCompatActivity {
         setContentView(R.layout.page3);
 
         String std_day = "2021:08:01";
+        long diff_first;
         long diff_day;
+        long week_first;
+        long week_today;
         try {
             long now = System.currentTimeMillis();
             Date date = new Date(now);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
-
-            Date std_date = sdf.parse(std_day);
-            diff_day = date.getTime() - std_date.getTime();
-            diff_day = diff_day / (24 * 60 * 60 * 1000);
-            diff_day = Math.abs(diff_day);
-
-            System.out.println(diff_day);
-
 
             String getTime = sdf.format(date);
 
@@ -72,14 +67,27 @@ public class page3Activity extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
-            cal.add(Calendar.DATE, -1);
-            String beforeDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+            cal.add(Calendar.DATE,0);
+            String Date = new java.text.SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
 
-            String beforeYear = beforeDate.substring(0, 4);
-            String beforeMonth = beforeDate.substring(5, 7);
-            String beforeDay = beforeDate.substring(8, 10);
+            String Year = Date.substring(0, 4);
+            String Month = Date.substring(5, 7);
+            String Day = Date.substring(8, 10);
 
-            String APItime = beforeYear + beforeMonth + beforeDay + "1800";
+            Date std_date = sdf.parse(std_day);
+            diff_day = date.getTime() - std_date.getTime();
+            diff_day = diff_day / (24 * 60 * 60 * 1000);
+            diff_day = Math.abs(diff_day);
+
+            String date_first = Year+":"+Month+":"+"01";
+            Date first_date = sdf.parse(date_first);
+            diff_first = first_date.getTime() - std_date.getTime();
+            diff_first = diff_first / (24 * 60 * 60 * 1000);
+            diff_first = Math.abs(diff_first);
+
+            System.out.println(diff_first % 7);
+
+            String APItime = Year + Month + Day + "0600";
 
             //장기 예보
 
