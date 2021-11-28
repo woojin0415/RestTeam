@@ -9,9 +9,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
@@ -64,6 +67,10 @@ public class page3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page3);
+        
+        int select_y;
+        int select_m;
+        int select_d;
 
         String std_day = "2021:08:01";
         long diff_first;
@@ -71,6 +78,10 @@ public class page3Activity extends AppCompatActivity {
         long week_first;
         long week_today;
         long today_month;
+
+        Button bt_next = findViewById(R.id.bt_3page);
+        CalendarView cv = findViewById(R.id.calendar);
+
         try {
             long now = System.currentTimeMillis();
             Date date = new Date(now);
@@ -199,6 +210,15 @@ public class page3Activity extends AppCompatActivity {
                 ImageView iv = (ImageView)findViewById(IVhash[(today+7)%35]);
                 iv.setImageResource(R.drawable.sun);
             }
+
+
+
+            cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                @Override
+                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                    
+                }
+            });
 
             // 단기 예보
 
