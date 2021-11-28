@@ -147,6 +147,59 @@ public class page3Activity extends AppCompatActivity {
                 iv.setImageResource(R.drawable.sun);
             }
 
+
+            if(wf4Pm.contains("비")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+4%35]);
+                iv.setImageResource(R.drawable.rain);
+            }
+            else if(wf4Pm.contains("구름")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+4%35]);
+                iv.setImageResource(R.drawable.cloud);
+            }
+            else if(wf4Pm.contains("맑음")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+4%35]);
+                iv.setImageResource(R.drawable.sun);
+            }
+
+            if(wf5Pm.contains("비")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+5%35]);
+                iv.setImageResource(R.drawable.rain);
+            }
+            else if(wf3Pm.contains("구름")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+5%35]);
+                iv.setImageResource(R.drawable.cloud);
+            }
+            else if(wf3Pm.contains("맑음")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+5%35]);
+                iv.setImageResource(R.drawable.sun);
+            }
+
+            if(wf6Pm.contains("비")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+6%35]);
+                iv.setImageResource(R.drawable.rain);
+            }
+            else if(wf6Pm.contains("구름")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+6%35]);
+                iv.setImageResource(R.drawable.cloud);
+            }
+            else if(wf6Pm.contains("맑음")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+6%35]);
+                iv.setImageResource(R.drawable.sun);
+            }
+
+            if(wf7Pm.contains("비")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+7%35]);
+                iv.setImageResource(R.drawable.rain);
+            }
+            else if(wf7Pm.contains("구름")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+7%35]);
+                iv.setImageResource(R.drawable.cloud);
+            }
+            else if(wf7Pm.contains("맑음")){
+                ImageView iv = (ImageView)findViewById(IVhash[today+7%35]);
+                iv.setImageResource(R.drawable.sun);
+            }
+
             // 단기 예보
 
 
