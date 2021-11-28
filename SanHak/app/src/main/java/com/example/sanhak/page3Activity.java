@@ -67,10 +67,10 @@ public class page3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page3);
-        
-        int select_y;
-        int select_m;
-        int select_d;
+
+        final int[] select_y = new int[1];
+        final int[] select_m = new int[1];
+        final int[] select_d = new int[1];
 
         String std_day = "2021:08:01";
         long diff_first;
@@ -216,6 +216,17 @@ public class page3Activity extends AppCompatActivity {
             cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
                 @Override
                 public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                    select_y[0] = year;
+                    select_m[0] = month;
+                    select_d[0] = dayOfMonth;
+
+                }
+            });
+            
+
+            bt_next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     
                 }
             });
