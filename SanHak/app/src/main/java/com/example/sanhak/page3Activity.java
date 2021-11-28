@@ -217,17 +217,21 @@ public class page3Activity extends AppCompatActivity {
                 @Override
                 public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                     select_y[0] = year;
-                    select_m[0] = month;
+                    select_m[0] = month+1;
                     select_d[0] = dayOfMonth;
 
                 }
             });
-            
+
 
             bt_next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
+                    String y = String.valueOf(select_y[0]);
+                    String m = String.valueOf(select_m[0]);
+                    String d = String.valueOf(select_d[0]);
+                    System.out.println(y+"/"+m+"/"+d);
+
                 }
             });
 
