@@ -16,13 +16,13 @@ public class page2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page2);
 
-        String[] Region = {"-지역 선택-","서울", "경기", "인천", "충청북도"};
-        String[] Region_Seoul={"-세부 지역 선택-", "강서구", "양천구", "구로구","영등포구","금천구","관악구","동작구","서초구"
-        , "강남구", "송파구", "강동구", "흥신구","마포구","서대문구","종로구","중구","성동구","광진구","중랑구","동대문구","서대문구",
-        "은평구","성북구","강북구","도봉구","노원구"};
-        String[] Region_Chungbuk={"-세부 지역 선택-","단양군","제천시","충주시","음성군","진천군","증평군","괴산군","청주시","보은군","옥천군","영동군"};
-
-
+        String[] Region = {"-지역 선택-","서울 인천 경기", "부산 울산 경상남도", "대구 경상북도", "광주 전라남도", "전라북도", "대전 세종 충청남도",
+        "충청북도", "강원도", "제주도"};
+        String[] Region_Seoul={"-세부 지역 선택-", "서울","인천","수원","성남","안양","광명","과천","평택","오산","의왕","용인","군포","안성","화성",
+        "양평","구리","남양주","하남","이천","여주","광주","의정부","고양","파주","양주","동두천","연천","포천","가평","강화","김포","시흥","부천","안산","백령도"};
+        String[] Region_Busan={"-세부 지역 선택-","부산","울산","김해","양산","창원","밀양","함안","창녕","의령","진주","하동","사천","거창","합천","산청",
+        "함양","통영","거제","고성","남해"};
+        
 
 
         Spinner sp1 = (Spinner) findViewById(R.id.region);
@@ -33,8 +33,8 @@ public class page2Activity extends AppCompatActivity {
         ArrayAdapter<String> adapter_seoul = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Seoul);
         adapter_seoul.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
-        ArrayAdapter<String> adapter_chungbuk = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Chungbuk);
-        adapter_chungbuk.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter_busan = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Busan);
+        adapter_busan.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
 
 
@@ -45,12 +45,13 @@ public class page2Activity extends AppCompatActivity {
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(sp1.getSelectedItem().toString() == "서울"){
+                if(sp1.getSelectedItem().toString() == "서울 인천 경기"){
                     selectbox_detail.setAdapter(adapter_seoul);
                 }
-                else if(sp1.getSelectedItem().toString() == "충청북도"){
-                    selectbox_detail.setAdapter(adapter_chungbuk);
+                else if(sp1.getSelectedItem().toString() == "부산 울산 경상남도"){
+                    selectbox_detail.setAdapter(adapter_busan);
                 }
+
             }
 
             @Override
