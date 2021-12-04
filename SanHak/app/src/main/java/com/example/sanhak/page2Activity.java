@@ -26,6 +26,7 @@ public class page2Activity extends AppCompatActivity {
         "예천","영주","봉화","영양","울진","영덕","포항","경주","울릉도","독도"};
         String[] Region_Gwangju={"-세부 지역 선택-","광주","나주","장성","담양","화순","영광","함평","목포","무안","영암","진도","신안","흑산도","순천","광양","구례",
                 "곡성","완도","강진","장흥","해남","여수","고흥","보성"};
+        String[] Region_Junrabukdo = {"-세부 지역 선택-","전주","익산","군산","정읍","김제","남원","고창","무주","부안","순창","완주","임실","장수","진안"};
 
 
 
@@ -45,6 +46,9 @@ public class page2Activity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter_gwangju = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Gwangju);
         adapter_gwangju.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_junrabukdo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Junrabukdo);
+        adapter_junrabukdo.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
 
 
@@ -66,6 +70,9 @@ public class page2Activity extends AppCompatActivity {
                 }
                 else if(sp1.getSelectedItem().toString() == "광주 전라남도") {
                     selectbox_detail.setAdapter(adapter_gwangju);
+                }
+                else if(sp1.getSelectedItem().toString() == "전라북도") {
+                    selectbox_detail.setAdapter(adapter_junrabukdo);
                 }
 
             }
