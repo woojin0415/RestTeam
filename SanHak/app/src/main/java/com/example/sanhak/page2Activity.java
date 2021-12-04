@@ -31,6 +31,7 @@ public class page2Activity extends AppCompatActivity {
         String[] Region_Chungbuk = {"-세부 지역 선택-","청주","증평","괴산","진천","충주","음성","제천","단양","보은","옥천","영동","추풍령"};
         String[] Region_GangWondo= {"-세부 지역 선택-","철원","화천","인제","양구","춘천","홍천","원주","횡성","영월","정선","평창","대관령","속초","고성","양양","강릉","동해"
         ,"감척","태백"};
+        String[] Region_Jeju = {"-세부 지역 선택-","제주","서귀포","성산","고산","성판악","이어도","추자도"};
 
 
 
@@ -62,6 +63,9 @@ public class page2Activity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter_gangwondo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_GangWondo);
         adapter_gangwondo.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_jeju = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Jeju);
+        adapter_jeju.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
 
 
@@ -95,6 +99,9 @@ public class page2Activity extends AppCompatActivity {
                 }
                 else if(sp1.getSelectedItem().toString() == "강원도") {
                     selectbox_detail.setAdapter(adapter_gangwondo);
+                }
+                else if(sp1.getSelectedItem().toString() == "제주도") {
+                    selectbox_detail.setAdapter(adapter_jeju);
                 }
 
             }
