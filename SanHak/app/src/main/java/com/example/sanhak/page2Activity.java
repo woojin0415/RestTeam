@@ -22,7 +22,9 @@ public class page2Activity extends AppCompatActivity {
         "양평","구리","남양주","하남","이천","여주","광주","의정부","고양","파주","양주","동두천","연천","포천","가평","강화","김포","시흥","부천","안산","백령도"};
         String[] Region_Busan={"-세부 지역 선택-","부산","울산","김해","양산","창원","밀양","함안","창녕","의령","진주","하동","사천","거창","합천","산청",
         "함양","통영","거제","고성","남해"};
-        
+        String[] Region_Deagu={"-세부 지역 선택-","대구","영천","경산","청도","칠곡","김천","구미","군위","고령","성주","안동","의성","청송","상주","문경",
+        "예천","영주","봉화","영양","울진","영덕","포항","경주","울릉도","독도"};
+
 
 
         Spinner sp1 = (Spinner) findViewById(R.id.region);
@@ -35,6 +37,9 @@ public class page2Activity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter_busan = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Busan);
         adapter_busan.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_deagu = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Deagu);
+        adapter_deagu.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
 
 
@@ -50,6 +55,9 @@ public class page2Activity extends AppCompatActivity {
                 }
                 else if(sp1.getSelectedItem().toString() == "부산 울산 경상남도"){
                     selectbox_detail.setAdapter(adapter_busan);
+                }
+                else if(sp1.getSelectedItem().toString() == "대구 경상북도") {
+                    selectbox_detail.setAdapter(adapter_deagu);
                 }
 
             }
