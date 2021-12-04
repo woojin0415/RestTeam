@@ -28,6 +28,7 @@ public class page2Activity extends AppCompatActivity {
                 "곡성","완도","강진","장흥","해남","여수","고흥","보성"};
         String[] Region_Junrabukdo = {"-세부 지역 선택-","전주","익산","군산","정읍","김제","남원","고창","무주","부안","순창","완주","임실","장수","진안"};
         String[] Region_Deajun={"-세부 지역 선택-","대전","세종","공주","논산","계롱","금산","천안","아산","예산","서산","태안","당진","홍선","보령","서천","청양","부여"};
+        String[] Region_Chungbuk = {"-세부 지역 선택-","청주","증평","괴산","진천","충주","음성","제천","단양","보은","옥천","영동","추풍령"};
 
 
 
@@ -50,6 +51,9 @@ public class page2Activity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter_junrabukdo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Junrabukdo);
         adapter_junrabukdo.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_chungbuk = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Chungbuk);
+        adapter_chungbuk.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
         ArrayAdapter<String> adapter_deajun = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Deajun);
         adapter_deajun.setDropDownViewResource(android.R.layout.simple_spinner_item);
@@ -80,6 +84,9 @@ public class page2Activity extends AppCompatActivity {
                 }
                 else if(sp1.getSelectedItem().toString() == "대전 세종 충청남도") {
                     selectbox_detail.setAdapter(adapter_deajun);
+                }
+                else if(sp1.getSelectedItem().toString() == "충청북도") {
+                    selectbox_detail.setAdapter(adapter_chungbuk);
                 }
 
             }
