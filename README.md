@@ -1,7 +1,7 @@
 # RestTeam
 산학프로젝트 - 날씨 기반 관광지 추천 서비스
 
-설치방법
+# 설치방법
 ![1](https://user-images.githubusercontent.com/75172426/144983700-85942df6-9549-41ba-99c2-2572dca3ada1.png)
 1.Git hub code 페이지에서 빨간색 네모로 표시된 code 부분을 클릭한다.
 ![2](https://user-images.githubusercontent.com/75172426/144983703-b521d56a-4487-4d4d-b7fd-3c14a772eb53.png)
@@ -16,17 +16,19 @@
 6.핸드폰과 컴퓨터를 USB로 연결한 뒤 빨간 네모에서 해당 핸드폰을 클릭하고 ▶버튼을 눌러 앱을 핸드폰으로 다운 받는다
 
 
-의존성
+# 의존성
+Android Studio 2020.31 for windows
+SDK 버전 21~31
 
-
-사용방법
+# 사용방법
 핸드폰에서 앱을 다운 받은 후 핸드폰을 인터넷이 연결된 상태에서 사용한다.
 1Page에서 사용 시작 버튼을 누른다.
 2Page에서 지역을 선택한다.
 3Page에서 여행을 갈 날짜를 선택한다.
 4Page 구현중 ...
 
-라이선스 및 연락처
+# 라이선스 및 연락처
+개발자
+박우진 01053254609 woojin415@naver.com
 
 
-개발 환경 : Android Studio 2020.31 for windows
