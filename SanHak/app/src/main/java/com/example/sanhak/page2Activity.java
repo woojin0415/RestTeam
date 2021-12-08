@@ -16,12 +16,22 @@ public class page2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page2);
 
-        String[] Region = {"-지역 선택-","서울", "경기", "인천", "충청북도"};
-        String[] Region_Seoul={"-세부 지역 선택-", "강서구", "양천구", "구로구","영등포구","금천구","관악구","동작구","서초구"
-        , "강남구", "송파구", "강동구", "흥신구","마포구","서대문구","종로구","중구","성동구","광진구","중랑구","동대문구","서대문구",
-        "은평구","성북구","강북구","도봉구","노원구"};
-        String[] Region_Chungbuk={"-세부 지역 선택-","단양군","제천시","충주시","음성군","진천군","증평군","괴산군","청주시","보은군","옥천군","영동군"};
-
+        String[] Region = {"-지역 선택-","서울 인천 경기", "부산 울산 경상남도", "대구 경상북도", "광주 전라남도", "전라북도", "대전 세종 충청남도",
+        "충청북도", "강원도", "제주도"};
+        String[] Region_Seoul={"-세부 지역 선택-", "서울","인천","수원","성남","안양","광명","과천","평택","오산","의왕","용인","군포","안성","화성",
+        "양평","구리","남양주","하남","이천","여주","광주","의정부","고양","파주","양주","동두천","연천","포천","가평","강화","김포","시흥","부천","안산","백령도"};
+        String[] Region_Busan={"-세부 지역 선택-","부산","울산","김해","양산","창원","밀양","함안","창녕","의령","진주","하동","사천","거창","합천","산청",
+        "함양","통영","거제","고성","남해"};
+        String[] Region_Deagu={"-세부 지역 선택-","대구","영천","경산","청도","칠곡","김천","구미","군위","고령","성주","안동","의성","청송","상주","문경",
+        "예천","영주","봉화","영양","울진","영덕","포항","경주","울릉도","독도"};
+        String[] Region_Gwangju={"-세부 지역 선택-","광주","나주","장성","담양","화순","영광","함평","목포","무안","영암","진도","신안","흑산도","순천","광양","구례",
+                "곡성","완도","강진","장흥","해남","여수","고흥","보성"};
+        String[] Region_Junrabukdo = {"-세부 지역 선택-","전주","익산","군산","정읍","김제","남원","고창","무주","부안","순창","완주","임실","장수","진안"};
+        String[] Region_Deajun={"-세부 지역 선택-","대전","세종","공주","논산","계롱","금산","천안","아산","예산","서산","태안","당진","홍선","보령","서천","청양","부여"};
+        String[] Region_Chungbuk = {"-세부 지역 선택-","청주","증평","괴산","진천","충주","음성","제천","단양","보은","옥천","영동","추풍령"};
+        String[] Region_GangWondo= {"-세부 지역 선택-","철원","화천","인제","양구","춘천","홍천","원주","횡성","영월","정선","평창","대관령","속초","고성","양양","강릉","동해"
+        ,"감척","태백"};
+        String[] Region_Jeju = {"-세부 지역 선택-","제주","서귀포","성산","고산","성판악","이어도","추자도"};
 
 
 
@@ -33,8 +43,29 @@ public class page2Activity extends AppCompatActivity {
         ArrayAdapter<String> adapter_seoul = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Seoul);
         adapter_seoul.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
+        ArrayAdapter<String> adapter_busan = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Busan);
+        adapter_busan.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_deagu = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Deagu);
+        adapter_deagu.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_gwangju = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Gwangju);
+        adapter_gwangju.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_junrabukdo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Junrabukdo);
+        adapter_junrabukdo.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
         ArrayAdapter<String> adapter_chungbuk = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Chungbuk);
         adapter_chungbuk.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_deajun = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Deajun);
+        adapter_deajun.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_gangwondo = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_GangWondo);
+        adapter_gangwondo.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<String> adapter_jeju = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,Region_Jeju);
+        adapter_jeju.setDropDownViewResource(android.R.layout.simple_spinner_item);
 
 
 
@@ -45,12 +76,34 @@ public class page2Activity extends AppCompatActivity {
         sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(sp1.getSelectedItem().toString() == "서울"){
+                if(sp1.getSelectedItem().toString() == "서울 인천 경기"){
                     selectbox_detail.setAdapter(adapter_seoul);
                 }
-                else if(sp1.getSelectedItem().toString() == "충청북도"){
+                else if(sp1.getSelectedItem().toString() == "부산 울산 경상남도"){
+                    selectbox_detail.setAdapter(adapter_busan);
+                }
+                else if(sp1.getSelectedItem().toString() == "대구 경상북도") {
+                    selectbox_detail.setAdapter(adapter_deagu);
+                }
+                else if(sp1.getSelectedItem().toString() == "광주 전라남도") {
+                    selectbox_detail.setAdapter(adapter_gwangju);
+                }
+                else if(sp1.getSelectedItem().toString() == "전라북도") {
+                    selectbox_detail.setAdapter(adapter_junrabukdo);
+                }
+                else if(sp1.getSelectedItem().toString() == "대전 세종 충청남도") {
+                    selectbox_detail.setAdapter(adapter_deajun);
+                }
+                else if(sp1.getSelectedItem().toString() == "충청북도") {
                     selectbox_detail.setAdapter(adapter_chungbuk);
                 }
+                else if(sp1.getSelectedItem().toString() == "강원도") {
+                    selectbox_detail.setAdapter(adapter_gangwondo);
+                }
+                else if(sp1.getSelectedItem().toString() == "제주도") {
+                    selectbox_detail.setAdapter(adapter_jeju);
+                }
+
             }
 
             @Override
